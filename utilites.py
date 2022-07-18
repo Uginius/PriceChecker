@@ -5,6 +5,7 @@ import time
 
 from config import markets
 from src.goods import goods
+from src.stock_from_xls import stock
 
 
 def time_track(func):
@@ -32,17 +33,40 @@ def get_last_dir(directory='htmls'):
     return final_dir
 
 
-def get_product_links():
-    all_goods_in_platforms = {}
+# def get_product_links():
+#     all_goods_in_platforms = {}
+#     used_platforms = list(markets.keys())
+#     for rosel_id in goods:
+#         current_platforms = goods[rosel_id]['competitors']
+#         for platform in current_platforms:
+#             if not platform in used_platforms:
+#                 continue
+#             shop_goods = current_platforms[platform]
+#             if not all_goods_in_platforms.get(platform):
+#                 all_goods_in_platforms[platform] = []
+#             all_goods_in_platforms[platform].extend(shop_goods)
+#     return all_goods_in_platforms
+
+
+def divide_goods_by_platforms():
+    pl = {}
     used_platforms = list(markets.keys())
-    for rosel_id in goods:
-        merch = goods[rosel_id]
-        current_platforms = merch['competitors']
-        for platform in current_platforms:
-            if not platform in used_platforms:
+    for rosel_id in stock:
+        platform_competitors = stock[rosel_id]['competitors']
+        for shop, shop_goods in platform_competitors.items():
+            if not shop in used_platforms:
                 continue
-            shop_goods = current_platforms[platform]
-            if not all_goods_in_platforms.get(platform):
-                all_goods_in_platforms[platform] = []
-            all_goods_in_platforms[platform].extend(shop_goods)
-    return all_goods_in_platforms
+            if not pl.get(shop):
+                pl[shop] = []
+            pl[shop].extend(shop_goods)
+    return pl
+
+
+def get_platform(shop_url):
+    platforms = list(markets)
+    for shop in platforms:
+        if shop in shop_url:
+            return shop
+    return None
+
+

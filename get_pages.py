@@ -15,18 +15,10 @@ class PageGetter(Thread):
         self.platform = platform
         self.links = links
         self.date = datetime.datetime.now().strftime('%Y-%m-%d')
-        self.use_selenium = False
-        self.check_for_using_selenium()
+        self.use_selenium = platform in ['leroy', 'dns']
         self.cur_html_data = None
         self.browser = None
-        self.filename = None
-
-    def check_for_using_selenium(self):
-        match self.platform in ['baucenter']:
-            case True:
-                self.use_selenium = True
-            case _:
-                self.use_selenium = False
+        self.search_id = None
 
     def run(self):
         check_dir(f'htmls/{self.date}/{self.platform}_files/')
@@ -45,11 +37,11 @@ class PageGetter(Thread):
     def get_pages(self):
         ll = len(self.links)
         for order, url in enumerate(self.links, start=1):
-            wait_time = randint(5, 15)
-            print(f'{self.platform:>10} ({order:03} / {ll:03}), waiting: {wait_time:3} | connecting to url: {url}')
+            wait_time = randint(3, 10)
+            print(f'{self.platform:>10} ({order:03} / {ll:03}), waiting: {wait_time:2} | connecting to url: {url}')
             self.get_page(url)
             time.sleep(wait_time)
-            self.filename = url.split('/')[-2]
+            self.search_id = url.split('=')[-1]
             self.save_page()
 
     def get_page(self, url):
@@ -65,7 +57,7 @@ class PageGetter(Thread):
                 print(f'ERROR: {ex}, URL: {url}')
 
     def save_page(self):
-        filename = f'htmls/{self.date}/{self.platform}_files/{self.filename}.html'
+        filename = f'htmls/{self.date}/{self.platform}_files/{self.search_id}.html'
         with open(filename, 'w', encoding='utf8') as write_file:
             write_file.write(self.cur_html_data)
 

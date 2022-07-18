@@ -6,7 +6,7 @@ match sys.platform:
         user_agent = None
     case 'darwin':
         browser_path = 'drivers/chromedriver'
-        user_agent = None
+        user_agent = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36'
     case 'win32':
         browser_path = 'drivers/chromedriver.exe'
         user_agent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0 Safari/537.36'
@@ -16,10 +16,10 @@ match sys.platform:
 
 markets = {
     'maxidom': 'https://www.maxidom.ru/',
-    'leroy': 'https://spb.leroymerlin.ru/',
+    # 'leroy': 'https://spb.leroymerlin.ru/',  # incorrect data
     'megastroy': 'https://megastroy.com/',
     'baucenter': 'https://baucenter.ru/',
-    'dns': 'https://www.dns-shop.ru/',
+    'dns': 'https://www.dns-shop.ru/',  # selenium data
     'petrovich': 'https://petrovich.ru/',
     'vprok': 'https://www.vprok.ru/',
     'ststroitel': 'https://www.ststroitel.ru/'
