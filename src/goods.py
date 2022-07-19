@@ -77,12 +77,13 @@ goods = {
     22447: {
         'commodity': 'ЭП',
         'competitors': {
-            'baucenter': ['https://baucenter.ru/batareyki/865263/',
-                          'https://baucenter.ru/batareyki/316584/',
-                          'https://baucenter.ru/batareyki/820459/',
-                          'https://baucenter.ru/batareyki/865257/',
-                          'https://baucenter.ru/batareyki/820457/',
-                          'https://baucenter.ru/batareyki/316583/'],
+            'baucenter': [
+                'https://baucenter.ru/batareyki/865263/',
+                'https://baucenter.ru/batareyki/316584/',
+                'https://baucenter.ru/batareyki/820459/',
+                'https://baucenter.ru/batareyki/865257/',
+                'https://baucenter.ru/batareyki/820457/',
+                'https://baucenter.ru/batareyki/316583/'],
             'dns': [
                 'https://www.dns-shop.ru/product/53523cc2679c3330/batarejka-selocnaa-gp-super-d-lr20/',
                 'https://www.dns-shop.ru/product/fd3c0dd4dac62ff2/batarejka-selocnaa-varta-longl-power/'],
